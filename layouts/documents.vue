@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ACCOUNT } from '@/libs/appwrite'
-import { useAuthStore } from '@/stores/auth.store'
-import { useLoadingStore } from '@/stores/loading.store'
+import { ACCOUNT } from '~/libs/appwrite'
+import { useAuthStore } from '~/stores/auth.store'
+import { useLoadingStore } from '~/stores/loading.store'
 
 const authStore = useAuthStore()
 const loadingStore = useLoadingStore()
@@ -22,10 +22,13 @@ onMounted(() => {
 
 <template>
 	<UiLoader v-if="loadingStore.isLoading" />
-	<template v-else>
-		<LayoutsMainNavbar />
-		<section class="min-h-screen bg-white dark:bg-black">
-			<slot />
+	<main v-else>
+		<LayoutsNavbar />
+		<LayoutsSidebar />
+		<section class="min-h-screen bg-white dark:bg-black pl-72 pt-[10vh]">
+			<div class="p-4">
+				<slot />
+			</div>
 		</section>
-	</template>
+	</main>
 </template>

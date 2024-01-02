@@ -2,5 +2,5 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxt/image', '@pinia/nuxt'],
-  pinia: { storeDirs: ['./stores/**'] },
+  pinia: { storesDirs: ['./stores/**'] },
 })

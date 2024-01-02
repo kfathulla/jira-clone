@@ -1,30 +1,32 @@
 <script lang="ts" setup>
+import { ACCOUNT } from '~/libs/appwrite'
+import { useLoadingStore } from '@/stores/loading.store'
+
 definePageMeta({ layout: 'auth' })
 useHead({ title: 'Auth | Jira software' })
 
 const router = useRouter()
+const loadingStore = useLoadingStore()
 
-// onMounted(() => {
-// 	ACCOUNT.get()
-// 		.then(() => router.push('/'))
-// 		.catch(() => loadingStore.set(false))
-// })
+onMounted(() => {
+	ACCOUNT.get()
+		.then(() => router.push('/'))
+		.catch(() => loadingStore.set(false))
+})
 
 const isLogin = ref(true)
 
 const toggleLogin = () => (isLogin.value = !isLogin.value)
 
-const onGoogle = () => {
-	// ACCOUNT.createOAuth2Session('google', 'https://jira.sammi.app')
-}
+const onGoogle = () =>
+	ACCOUNT.createOAuth2Session('google', 'http://localhost:3000')
 
-const onGithub = () => {
-	// ACCOUNT.createOAuth2Session('github', 'https://jira.sammi.app')
-}
+const onGithub = () =>
+	ACCOUNT.createOAuth2Session('github', 'http://localhost:3000')
 </script>
 
 <template>
-	<UiLoader v-if="false" />
+	<UiLoader v-if="loadingStore.isLoading" />
 
 	<div class="flex items-center justify-center h-screen w-full relative" v-else>
 		<NuxtImg

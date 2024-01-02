@@ -1,5 +1,10 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { tabs, templates } from '@/constants'
+import { useAuthStore } from '~/stores/auth.store'
+
+useHead({ title: 'Jira software' })
+
+const { currentUser } = useAuthStore()
 </script>
 
 <template>
@@ -15,7 +20,7 @@ import { tabs, templates } from '@/constants'
 				<p class="text-lg opacity-80">
 					The #1 software development tool used by agile teams
 				</p>
-				<template v-if="false">
+				<template v-if="currentUser.status">
 					<NuxtLink to="/documents">
 						<UButton color="blue">Documents</UButton>
 					</NuxtLink>
